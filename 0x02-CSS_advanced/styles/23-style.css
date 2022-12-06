@@ -505,7 +505,7 @@ ul.row {
 .footer ul {
   text-align: right;
 }
-.row:after {
+.row::after {
   content: "";
   display: table;
   clear: both;
