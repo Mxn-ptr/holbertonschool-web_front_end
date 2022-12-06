@@ -55,7 +55,7 @@ a:active {
 	display: none;
 }
 .section-header {
-	text-align: center;
+	text-align: var(--section-header-align);
 }
 .card-category, .section-tagline {
 	color: var(--color-primary);
