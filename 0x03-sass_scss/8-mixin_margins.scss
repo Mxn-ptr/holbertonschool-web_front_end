@@ -1,0 +1,12 @@
+/* Use a mixin */
+@mixin margin($pixel: 10px) {
+	margin-left: $pixel;
+	margin-right: $pixel;
+}
+
+body {
+	@include margin;
+}
+div {
+	@include margin($pixel: 15px);
+}
