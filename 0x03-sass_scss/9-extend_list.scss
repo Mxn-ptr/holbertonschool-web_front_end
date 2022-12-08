@@ -1,15 +1,12 @@
 /* Extend list */
-%font-size {
-	font-size: 12px;
-}
 .info {
-	@extend %font-size;
+	font-size: 12px;;
 }
 .success {
-	@extend %font-size;
+	@extend .info;
 	color: #00FF00;
 }
 .warning {
-	@extend %font-size;
+	@extend .info;
 	color: #FF0000;
 }
