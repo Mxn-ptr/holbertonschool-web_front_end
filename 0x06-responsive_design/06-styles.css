@@ -413,7 +413,7 @@
 
   @media (max-width: 480px) {
     .header-logo {
-      flex-basis: 79%;
+      flex-basis: 70%;
     }
   }
 
