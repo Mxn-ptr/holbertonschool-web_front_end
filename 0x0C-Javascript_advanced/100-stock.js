@@ -15,7 +15,7 @@ function processError(itemName) {
 
 function processOrder(itemName, callbackPayment, callbackError) {
   console.log(`Verifying the stock of ${itemName}`);
-  if (stock[itemName.toLowerCase()] > 1 && stock[itemName.toLowerCase() !== undefined]) {
+  if (stock[itemName.toLowerCase()] > 1 && stock[itemName.toLowerCase()] !== undefined) {
     callbackPayment(itemName.toLowerCase());
   } else {
     callbackError(itemName)
