@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Task 0</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <script type="application/javascript">
+      $(document).ready(() => {
+        $.addPostRow = (data) => {
+          $("body").append(
+            $("<p>").append(
+              $("<span>").text(
+                `Post created with id ${data.id}, title: ${data.title}, author: ${data.author}`
+              )
+            )
+          );
+        };
+        $.listPosts = () => {
+          $.get("http://localhost:3000/posts", function (data) {
+            data.forEach((d) => $.addPostRow(d));
+          }).fail(() => {
+            alert("Server Error");
+          });
+        };
+        $.buildForm = () => {
+          $("body").append("<form>");
+          $("form").append(
+            $("<div>").append(
+              $("<label>").attr("for", "author").text("Author"),
+              $("<input>").attr({ type: "text", id: "author" })
+            )
+          );
+          $("form").append(
+            $("<div>").append(
+              $("<label>").attr("for", "title").text("Title"),
+              $("<textarea>").attr({ id: "title" })
+            )
+          );
+          $("form").append($("<input>").attr("type", "submit").click(function() {$.sendForm()}));
+        };
+        $.sendForm = () => {
+          $("form").after($("<p>").text("About to send the query to the API"));
+          let data = {
+            title: $("#title").val(),
+            author: $("#author").val(),
+          };
+          $.ajax({
+            type: "POST",
+            data: data,
+            url: "http://localhost:3000/posts",
+            success : (res) => $.addPostRow(res)
+          }).fail(() => alert("Error sending the POST query"))
+        }
+        $.listPosts();
+        $.buildForm();
+        $("label").click(function() {
+          $("label").closest("input").focus();
+        });
+        $("input").keypress(function(event) {
+          if (event.which === 13) {
+            $.sendForm();
+          }
+        })
+        $("textarea").keypress(function(event) {
+          if (event.which === 13) {
+            $.sendForm();
+          }
+        })
+      });
+    </script>
+  </body>
+</html>
